@@ -88,18 +88,11 @@ p {
   min-width: 0;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--gold-bright);
-  background: rgba(255, 255, 255, 0.04);
+.brand-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(216, 166, 79, 0.25));
 }
 
 .brand-name {
@@ -672,9 +665,9 @@ body.nav-open .menu-toggle span:last-child {
     gap: 9px;
   }
 
-  .brand-mark {
-    width: 38px;
-    height: 38px;
+  .brand-logo {
+    width: 42px;
+    height: 42px;
   }
 
   .brand-name {
