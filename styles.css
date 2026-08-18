@@ -791,7 +791,16 @@ body.nav-open .menu-toggle span:last-child {
 
 @media (max-width: 900px) {
   :root {
-    --header-h: 64px;
+    --header-h: 112px;
+  }
+
+  .site-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 64px 40px;
+    align-items: center;
+    row-gap: 4px;
+    padding-block: 0 6px;
   }
 
   .site-nav {
@@ -799,20 +808,49 @@ body.nav-open .menu-toggle span:last-child {
   }
 
   .nav-music {
-    display: none;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    width: min(100%, 460px);
+    max-width: none;
+    min-width: 0;
+    justify-self: center;
+    padding: 4px 10px 4px 6px;
+  }
+
+  .nav-music-toggle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-music-copy span {
+    font-size: 0.64rem;
+    margin-bottom: 0;
+  }
+
+  .nav-music-copy canvas {
+    height: 14px;
   }
 
   .menu-toggle {
     display: flex;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
   }
 
   .brand-name {
     font-size: 0.9rem;
   }
 
+  .brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   .hero {
     min-height: 100svh;
-    padding: calc(var(--header-h) + 42svh) 20px 34px;
+    padding: calc(var(--header-h) + 36svh) 20px 34px;
   }
 
   .hero-gradient {
@@ -886,7 +924,7 @@ body.nav-open .menu-toggle span:last-child {
   }
 
   .hero {
-    padding-top: calc(var(--header-h) + 38svh);
+    padding-top: calc(var(--header-h) + 34svh);
   }
 
   .story-card {
