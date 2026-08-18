@@ -28,6 +28,7 @@
     <link rel="icon" type="image/png" href="assets/favicon-192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="assets/favicon-512.png" />
     <link rel="preload" href="assets/hero-tomb.png" as="image" />
+    <link rel="preload" href="assets/hero-reel.mp4" as="video" type="video/mp4" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,10 +58,23 @@
           <span class="word-from">from</span><span class="word-thorns">Thorns</span><span class="word-to">To</span><span class="word-glory">Glory</span>
         </span>
       </a>
+      <div class="nav-music" aria-label="Known By Love mini player">
+        <button class="nav-music-toggle" type="button" aria-label="Play Known By Love">
+          <i class="fa-solid fa-play" aria-hidden="true"></i>
+        </button>
+        <div class="nav-music-copy">
+          <span>Known By Love</span>
+          <canvas id="nav-music-visualizer" width="180" height="28" aria-hidden="true"></canvas>
+        </div>
+        <audio id="nav-known-by-love-audio" preload="metadata">
+          <source src="assets/known-by-love.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
       <nav class="site-nav" aria-label="Primary">
-        <a href="#mission"><i class="fa-solid fa-cross" aria-hidden="true"></i> Mission</a>
         <a href="#series"><i class="fa-solid fa-book-bible" aria-hidden="true"></i> Shorts</a>
+        <a href="#music"><i class="fa-solid fa-music" aria-hidden="true"></i> Music</a>
         <a href="#artwork"><i class="fa-solid fa-sun" aria-hidden="true"></i> Artwork</a>
+        <a href="#mission"><i class="fa-solid fa-cross" aria-hidden="true"></i> Mission</a>
         <a href="#follow"><i class="fa-solid fa-heart" aria-hidden="true"></i> Follow</a>
       </nav>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -70,9 +84,10 @@
     </header>
 
     <div class="mobile-nav" id="mobile-nav" hidden>
-      <a href="#mission"><i class="fa-solid fa-cross" aria-hidden="true"></i> Mission</a>
       <a href="#series"><i class="fa-solid fa-book-bible" aria-hidden="true"></i> Shorts</a>
+      <a href="#music"><i class="fa-solid fa-music" aria-hidden="true"></i> Music</a>
       <a href="#artwork"><i class="fa-solid fa-sun" aria-hidden="true"></i> Artwork</a>
+      <a href="#mission"><i class="fa-solid fa-cross" aria-hidden="true"></i> Mission</a>
       <a href="#follow"><i class="fa-solid fa-heart" aria-hidden="true"></i> Follow</a>
     </div>
 
@@ -80,6 +95,9 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-bg" aria-hidden="true">
           <div class="hero-image"></div>
+          <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+            <source src="assets/hero-reel.mp4" type="video/mp4" />
+          </video>
           <div class="hero-gradient"></div>
         </div>
         <div class="hero-inner">
@@ -107,65 +125,147 @@
             </a>
           </div>
         </div>
-        <a class="scroll-hint" href="#mission" aria-label="Scroll to mission">
+        <a class="scroll-hint" href="#series" aria-label="Scroll to latest stories">
           <span>Scroll</span>
           <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
         </a>
       </section>
 
-      <section class="section mission" id="mission" aria-labelledby="mission-title">
-        <div class="container mission-grid">
-          <div class="mission-copy">
-            <p class="eyebrow">The mission</p>
-            <h2 id="mission-title">Faith visuals for people scrolling through heavy days.</h2>
+      <section class="section feature" id="series" aria-labelledby="series-title">
+        <div class="section-bg" aria-hidden="true">
+          <span style="--img: url('assets/story-mark-1-25.png')"></span>
+          <span style="--img: url('assets/story-john-19-30.png')"></span>
+          <span style="--img: url('assets/story-john-10-11.png')"></span>
+        </div>
+        <div class="container feature-inner">
+          <div class="feature-copy">
+            <p class="eyebrow">Latest stories</p>
+            <h2 id="series-title">New scripture moments from the current short series.</h2>
             <p>
-              <strong>fromThornsToGlory</strong> turns Scripture into short,
-              cinematic moments built for social media: a resurrection scene, a
-              healing touch, a road lit by mercy, a reminder that Jesus meets us
-              in the place we thought was finished.
+              The newest releases move through deliverance, the cross, light,
+              rest, and the Shepherd's care. Each story is shaped for vertical
+              video with bold imagery, worshipful music, and clear faith-centered
+              messaging.
             </p>
-            <p>
-              The page is designed to encourage, invite prayer, and make the
-              gospel feel visually alive in the middle of everyday feeds.
-            </p>
+            <a
+              class="playlist-link"
+              href="https://www.youtube.com/playlist?list=PLVC2P7Fd8wao"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+              The Hidden Treasury
+            </a>
           </div>
-          <div class="portrait-panel">
-            <img src="assets/jesus-portrait.png" alt="Cinematic portrait inspired by Jesus" />
+          <div class="story-cards" aria-label="Featured short series">
+            <a
+              class="story-card is-latest"
+              href="https://www.youtube.com/@fromThornsToGlory/shorts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch Mark 1:25 on fromThornsToGlory Shorts"
+            >
+              <img src="assets/story-mark-1-25.png" alt="Mark 1:25 social artwork with Jesus restoring a man" />
+              <div>
+                <span>Mark 1:25</span>
+                <h3>Deliverance speaks with authority.</h3>
+                <p>Jesus rebukes the unclean spirit and sets the captive free.</p>
+              </div>
+            </a>
+            <a
+              class="story-card"
+              href="https://www.youtube.com/shorts/O4NZff0Vnq8"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch John 19:30 on YouTube Shorts"
+            >
+              <img src="assets/story-john-19-30.png" alt="Bible opened to John 19:30 beside a cross and candle" />
+              <div>
+                <span>John 19:30</span>
+                <h3>It is finished.</h3>
+                <p>The cross becomes the place where mercy completes the work.</p>
+              </div>
+            </a>
+            <a
+              class="story-card"
+              href="https://www.youtube.com/shorts/cYEDZ-vphWE"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch John 8:12 on YouTube Shorts"
+            >
+              <img src="assets/story-john-8-12.png" alt="John 8:12 artwork with Jesus teaching in warm light" />
+              <div>
+                <span>John 8:12</span>
+                <h3>I am the light of the world.</h3>
+                <p>A cinematic reminder that the one who follows Him will not walk in darkness.</p>
+              </div>
+            </a>
+            <a
+              class="story-card"
+              href="https://www.youtube.com/@fromThornsToGlory/shorts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch John 10:11 on fromThornsToGlory Shorts"
+            >
+              <img src="assets/story-john-10-11.png" alt="John 10:11 artwork showing Jesus as the good shepherd" />
+              <div>
+                <span>John 10:11</span>
+                <h3>The good shepherd gives His life.</h3>
+                <p>A quiet story of protection, sacrifice, and being known by the Shepherd.</p>
+              </div>
+            </a>
+            <a
+              class="story-card"
+              href="https://www.youtube.com/shorts/OdAH-CgFrI8"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch Matthew 11:28 on YouTube Shorts"
+            >
+              <img src="assets/story-matthew-11-28.png" alt="Matthew 11:28 artwork inviting the weary to come to Jesus" />
+              <div>
+                <span>Matthew 11:28</span>
+                <h3>Come to Me.</h3>
+                <p>A call to the weary and burdened, carried with warmth and rest.</p>
+              </div>
+            </a>
+            <a
+              class="story-card"
+              href="https://www.youtube.com/shorts/EL6hkOsAoSo"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch John 11 on YouTube Shorts"
+            >
+              <img src="assets/hero-tomb.png" alt="Empty tomb at sunrise with crosses in the distance" />
+              <div>
+                <span>John 11</span>
+                <h3>Resurrection and life.</h3>
+                <p>The empty tomb remains the visual heartbeat of the page.</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>
 
-      <section class="section feature" id="series" aria-labelledby="series-title">
-        <div class="section-bg" aria-hidden="true">
-          <span style="--img: url('assets/glory-road.png')"></span>
-          <span style="--img: url('assets/healing-hands.png')"></span>
-          <span style="--img: url('assets/hero-tomb.png')"></span>
-        </div>
-        <div class="container feature-grid">
-          <div class="feature-copy">
-            <p class="eyebrow">Current shorts</p>
-            <h2 id="series-title">Scripture told like a scene you can feel.</h2>
+      <section class="section music" id="music" aria-labelledby="music-title">
+        <div class="music-bg" aria-hidden="true"></div>
+        <div class="container music-inner">
+          <div class="music-copy">
+            <p class="eyebrow">Music</p>
+            <h2 id="music-title">Known By Love</h2>
             <p>
-              Start with John 11 and John 14:6: resurrection, the way, the truth,
-              the life. Each short is shaped for vertical video with bold imagery,
-              worshipful music, and clear faith-centered messaging.
+              Stream the latest music from <strong>fromThornsToGlory</strong>
+              directly from Spotify.
             </p>
           </div>
-          <div class="story-cards" aria-label="Featured short series">
-            <article class="story-card">
-              <img src="assets/hero-tomb.png" alt="Empty tomb at sunrise with crosses in the distance" />
-              <div>
-                <span>John 11</span>
-                <h3>I am the resurrection and the life.</h3>
-              </div>
-            </article>
-            <article class="story-card">
-              <img src="assets/healing-hands.png" alt="Jesus inspired healing scene with hands laid in prayer" />
-              <div>
-                <span>John 14:6</span>
-                <h3>I am the way, and the truth, and the life.</h3>
-              </div>
-            </article>
+          <div class="music-player spotify-player" aria-label="Known By Love on Spotify">
+            <iframe
+              title="Known By Love by fromThornsToGlory on Spotify"
+              src="https://open.spotify.com/embed/artist/2Q4ij7nAbnffPkh4fKKBK4?utm_source=generator&theme=0"
+              width="100%"
+              height="352"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -189,6 +289,28 @@
               <span>Scripture</span>
               <span>Hope</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section mission" id="mission" aria-labelledby="mission-title">
+        <div class="container mission-grid">
+          <div class="mission-copy">
+            <p class="eyebrow">The mission</p>
+            <h2 id="mission-title">Faith visuals for people scrolling through heavy days.</h2>
+            <p>
+              <strong>fromThornsToGlory</strong> turns Scripture into short,
+              cinematic moments built for social media: a resurrection scene, a
+              healing touch, a road lit by mercy, a reminder that Jesus meets us
+              in the place we thought was finished.
+            </p>
+            <p>
+              The page is designed to encourage, invite prayer, and make the
+              gospel feel visually alive in the middle of everyday feeds.
+            </p>
+          </div>
+          <div class="portrait-panel">
+            <img src="assets/jesus-portrait.png" alt="Cinematic portrait inspired by Jesus" />
           </div>
         </div>
       </section>
@@ -301,6 +423,81 @@
       };
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
+
+      const navAudio = document.getElementById("nav-known-by-love-audio");
+      const navCanvas = document.getElementById("nav-music-visualizer");
+      const navToggle = document.querySelector(".nav-music-toggle");
+      if (navAudio && navCanvas && navToggle) {
+        const ctx = navCanvas.getContext("2d");
+        const icon = navToggle.querySelector("i");
+        let audioContext;
+        let analyser;
+        let source;
+        let data;
+
+        const drawNavVisualizer = (time) => {
+          const width = navCanvas.width;
+          const height = navCanvas.height;
+          ctx.clearRect(0, 0, width, height);
+          const bars = 28;
+          const gap = 2;
+          const barWidth = (width - gap * (bars - 1)) / bars;
+
+          for (let i = 0; i < bars; i += 1) {
+            let level = Math.sin(time / 520 + i * 0.72) * 0.5 + 0.5;
+            if (!navAudio.paused && analyser && data) {
+              analyser.getByteFrequencyData(data);
+              level = data[Math.floor((i / bars) * data.length)] / 255;
+            }
+            const barHeight = Math.max(4, level * height * 0.92);
+            const x = i * (barWidth + gap);
+            const y = (height - barHeight) / 2;
+            const gradient = ctx.createLinearGradient(0, y, 0, y + barHeight);
+            gradient.addColorStop(0, "rgba(255, 247, 235, 0.95)");
+            gradient.addColorStop(0.5, "rgba(255, 224, 163, 0.9)");
+            gradient.addColorStop(1, "rgba(201, 109, 104, 0.74)");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(x, y, Math.max(2, barWidth), barHeight);
+          }
+          requestAnimationFrame(drawNavVisualizer);
+        };
+
+        const initNavAudio = async () => {
+          audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+          if (!source) {
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 128;
+            data = new Uint8Array(analyser.frequencyBinCount);
+            source = audioContext.createMediaElementSource(navAudio);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+          }
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+        };
+
+        navToggle.addEventListener("click", async () => {
+          await initNavAudio();
+          if (navAudio.paused) {
+            await navAudio.play();
+          } else {
+            navAudio.pause();
+          }
+        });
+
+        const syncNavToggle = () => {
+          const isPlaying = !navAudio.paused;
+          navToggle.setAttribute("aria-label", isPlaying ? "Pause Known By Love" : "Play Known By Love");
+          icon.classList.toggle("fa-play", !isPlaying);
+          icon.classList.toggle("fa-pause", isPlaying);
+        };
+
+        navAudio.addEventListener("play", syncNavToggle);
+        navAudio.addEventListener("pause", syncNavToggle);
+        navAudio.addEventListener("ended", syncNavToggle);
+        requestAnimationFrame(drawNavVisualizer);
+      }
     </script>
   </body>
 </html>
