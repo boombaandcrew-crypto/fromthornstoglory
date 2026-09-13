@@ -479,6 +479,19 @@ body.nav-open .menu-toggle span:last-child {
   backdrop-filter: blur(8px);
 }
 
+.btn-youtube {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 0, 0, 0.82);
+  box-shadow: 0 12px 34px rgba(255, 0, 0, 0.26);
+  backdrop-filter: blur(8px);
+}
+
+.btn-youtube:hover,
+.btn-youtube:focus-visible {
+  background: #ff0000;
+}
+
 .scroll-hint {
   position: absolute;
   right: clamp(18px, 5vw, 52px);
