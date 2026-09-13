@@ -27,8 +27,6 @@
     <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="assets/favicon-192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="assets/favicon-512.png" />
-    <link rel="preload" href="assets/hero-tomb.png" as="image" />
-    <link rel="preload" href="assets/hero-reel.mp4" as="video" type="video/mp4" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -66,7 +64,7 @@
           <span>Known By Love</span>
           <canvas id="nav-music-visualizer" width="180" height="28" aria-hidden="true"></canvas>
         </div>
-        <audio id="nav-known-by-love-audio" preload="metadata">
+        <audio id="nav-known-by-love-audio" preload="auto" autoplay>
           <source src="assets/known-by-love.mp3" type="audio/mpeg" />
         </audio>
       </div>
@@ -94,35 +92,53 @@
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-bg" aria-hidden="true">
-          <div class="hero-image"></div>
-          <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-            <source src="assets/hero-reel.mp4" type="video/mp4" />
-          </video>
+          <iframe
+            class="hero-youtube-bg"
+            id="hero-youtube-bg"
+            title="Road To Golgotha background video"
+            src="https://www.youtube.com/embed/cpdTkrEdgdI?autoplay=1&mute=1&controls=0&start=0&end=30&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"
+            allow="autoplay; encrypted-media; picture-in-picture; web-share"
+            tabindex="-1"
+          ></iframe>
           <div class="hero-gradient"></div>
         </div>
+        <div class="hero-preview-finished" id="hero-preview-finished" aria-hidden="true">
+          <span>Continue the story</span>
+          <strong>Watch the full Road To Golgotha film on YouTube.</strong>
+          <a href="https://youtu.be/cpdTkrEdgdI" target="_blank" rel="noopener noreferrer">
+            Open YouTube
+            <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          </a>
+        </div>
         <div class="hero-inner">
-          <p class="eyebrow">Jesus inspired social stories</p>
-          <h1 id="hero-title" class="hero-wordmark">
-            <span class="hero-wordmark-line">
-              <span class="word-from">from</span><span class="word-thorns">Thorns</span>
-            </span>
-            <span class="hero-wordmark-line">
-              <span class="word-to">To</span><span class="word-glory">Glory</span>
-            </span>
-          </h1>
-          <p class="hero-lead">
-            Cinematic scripture shorts, worshipful visuals, and simple reminders
-            that the grave is empty and hope still speaks.
-          </p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="#series">
-              <i class="fa-solid fa-play" aria-hidden="true"></i>
-              Watch the Stories
-            </a>
-            <a class="btn btn-ghost" href="#follow">
-              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
-              Follow the Page
-            </a>
+          <div class="hero-copy">
+            <p class="eyebrow">Jesus inspired social stories</p>
+            <h1 id="hero-title" class="hero-wordmark">
+              <span class="hero-wordmark-line">
+                <span class="word-from">from</span><span class="word-thorns">Thorns</span>
+              </span>
+              <span class="hero-wordmark-line">
+                <span class="word-to">To</span><span class="word-glory">Glory</span>
+              </span>
+            </h1>
+            <p class="hero-lead">
+              Cinematic scripture shorts, worshipful visuals, and simple reminders
+              that the grave is empty and hope still speaks.
+            </p>
+            <div class="hero-ctas">
+              <a class="btn btn-primary" href="#series">
+                <i class="fa-solid fa-play" aria-hidden="true"></i>
+                Watch the Stories
+              </a>
+              <a class="btn btn-ghost" href="#follow">
+                <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+                Follow the Page
+              </a>
+              <a class="btn btn-ghost" href="https://youtu.be/cpdTkrEdgdI" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                Road To Golgotha
+              </a>
+            </div>
           </div>
         </div>
         <a class="scroll-hint" href="#series" aria-label="Scroll to latest stories">
@@ -133,19 +149,18 @@
 
       <section class="section feature" id="series" aria-labelledby="series-title">
         <div class="section-bg" aria-hidden="true">
-          <span style="--img: url('assets/story-mark-1-25.png')"></span>
-          <span style="--img: url('assets/story-john-19-30.png')"></span>
-          <span style="--img: url('assets/story-john-10-11.png')"></span>
+          <span style="--img: url('https://i.ytimg.com/vi/gS_5a_1XDXw/hq720.jpg')"></span>
+          <span style="--img: url('https://i.ytimg.com/vi/M5G_tk4MQZM/hq720.jpg')"></span>
+          <span style="--img: url('https://i.ytimg.com/vi/NFgmaBQLkvM/hq720.jpg')"></span>
         </div>
         <div class="container feature-inner">
           <div class="feature-copy">
             <p class="eyebrow">Latest stories</p>
-            <h2 id="series-title">New scripture moments from the current short series.</h2>
+            <h2 id="series-title">Every published Short from the YouTube channel.</h2>
             <p>
-              The newest releases move through deliverance, the cross, light,
-              rest, and the Shepherd's care. Each story is shaped for vertical
-              video with bold imagery, worshipful music, and clear faith-centered
-              messaging.
+              Each video transforms a Bible passage into a vertical scene with
+              bold imagery, reverent music, and a clear message of faith,
+              hope, rest, courage, and glory in Jesus.
             </p>
             <a
               class="playlist-link"
@@ -154,94 +169,27 @@
               rel="noopener noreferrer"
             >
               <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-              The Hidden Treasury
+              The Hidden Treasure
             </a>
           </div>
-          <div class="story-cards" aria-label="Featured short series">
-            <a
-              class="story-card is-latest"
-              href="https://www.youtube.com/@fromThornsToGlory/shorts"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Watch Mark 1:25 on fromThornsToGlory Shorts"
-            >
-              <img src="assets/story-mark-1-25.png" alt="Mark 1:25 social artwork with Jesus restoring a man" />
-              <div>
-                <span>Mark 1:25</span>
-                <h3>Deliverance speaks with authority.</h3>
-                <p>Jesus rebukes the unclean spirit and sets the captive free.</p>
-              </div>
-            </a>
-            <a
-              class="story-card"
-              href="https://www.youtube.com/shorts/O4NZff0Vnq8"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Watch John 19:30 on YouTube Shorts"
-            >
-              <img src="assets/story-john-19-30.png" alt="Bible opened to John 19:30 beside a cross and candle" />
-              <div>
-                <span>John 19:30</span>
-                <h3>It is finished.</h3>
-                <p>The cross becomes the place where mercy completes the work.</p>
-              </div>
-            </a>
-            <a
-              class="story-card"
-              href="https://www.youtube.com/shorts/cYEDZ-vphWE"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Watch John 8:12 on YouTube Shorts"
-            >
-              <img src="assets/story-john-8-12.png" alt="John 8:12 artwork with Jesus teaching in warm light" />
-              <div>
-                <span>John 8:12</span>
-                <h3>I am the light of the world.</h3>
-                <p>A cinematic reminder that the one who follows Him will not walk in darkness.</p>
-              </div>
-            </a>
-            <a
-              class="story-card"
-              href="https://www.youtube.com/@fromThornsToGlory/shorts"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Watch John 10:11 on fromThornsToGlory Shorts"
-            >
-              <img src="assets/story-john-10-11.png" alt="John 10:11 artwork showing Jesus as the good shepherd" />
-              <div>
-                <span>John 10:11</span>
-                <h3>The good shepherd gives His life.</h3>
-                <p>A quiet story of protection, sacrifice, and being known by the Shepherd.</p>
-              </div>
-            </a>
-            <a
-              class="story-card"
-              href="https://www.youtube.com/shorts/OdAH-CgFrI8"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Watch Matthew 11:28 on YouTube Shorts"
-            >
-              <img src="assets/story-matthew-11-28.png" alt="Matthew 11:28 artwork inviting the weary to come to Jesus" />
-              <div>
-                <span>Matthew 11:28</span>
-                <h3>Come to Me.</h3>
-                <p>A call to the weary and burdened, carried with warmth and rest.</p>
-              </div>
-            </a>
-            <a
-              class="story-card"
-              href="https://www.youtube.com/shorts/EL6hkOsAoSo"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Watch John 11 on YouTube Shorts"
-            >
-              <img src="assets/hero-tomb.png" alt="Empty tomb at sunrise with crosses in the distance" />
-              <div>
-                <span>John 11</span>
-                <h3>Resurrection and life.</h3>
-                <p>The empty tomb remains the visual heartbeat of the page.</p>
-              </div>
-            </a>
+          <div class="story-showcase" aria-label="Featured short series">
+            <div class="story-row-heading">
+              <span>Top 5 performing Shorts</span>
+              <small>Ranked by current YouTube views</small>
+            </div>
+            <div class="story-cards story-cards-top" id="top-story-cards"></div>
+            <div class="story-row-heading story-row-heading-secondary">
+              <span>More stories</span>
+              <small>Scroll to browse the rest</small>
+            </div>
+            <div class="story-scroll" id="story-scroll" tabindex="0" aria-label="More YouTube Shorts"></div>
+          </div>
+          <div class="author-library" aria-labelledby="author-library-title">
+            <div class="author-library-header">
+              <p class="eyebrow">Browse by book</p>
+              <h3 id="author-library-title">Find each story by book, chapter, and verse.</h3>
+            </div>
+            <div class="author-groups" id="author-groups"></div>
           </div>
         </div>
       </section>
@@ -383,6 +331,362 @@
     </footer>
 
     <script>
+      const youtubeStories = [
+        {
+          id: "gS_5a_1XDXw",
+          verse: "Job 1:21",
+          book: "Job",
+          title: "Still Praised God",
+          description: "Job worships through loss and declares that the Lord is still worthy."
+        },
+        {
+          id: "M5G_tk4MQZM",
+          verse: "Psalm 46:10",
+          book: "Psalm",
+          title: "Be Still and Know",
+          description: "A quiet call to rest in the Lord's presence and remember who He is."
+        },
+        {
+          id: "NFgmaBQLkvM",
+          verse: "Jesus Reigns",
+          book: "Messages",
+          title: "The Keys Are in His Hand",
+          description: "A cinematic reminder that authority, victory, and eternity belong to Jesus."
+        },
+        {
+          id: "7T0HGQ76q-k",
+          verse: "Mark 15:39",
+          book: "Mark",
+          title: "Surely He Was the Son of God",
+          description: "At the cross, even a hardened witness recognizes the glory of Christ."
+        },
+        {
+          id: "a7FUOMILGbs",
+          verse: "John 14:6",
+          book: "John",
+          title: "The Way, the Truth, and the Life",
+          description: "Jesus is the way home, the truth that stands, and the life that endures."
+        },
+        {
+          id: "QrAlHzHMDvg",
+          verse: "Matthew 5:44",
+          book: "Matthew",
+          title: "Love Your Enemies",
+          description: "One of Jesus' hardest commands becomes a call to mercy and surrender."
+        },
+        {
+          id: "SX6cRmXE59o",
+          verse: "Mark 8:36",
+          book: "Mark",
+          title: "What Will It Profit a Man?",
+          description: "A soul-searching warning about gaining the world and losing what matters."
+        },
+        {
+          id: "nY-rB0SGroY",
+          verse: "Matthew 14:22-34",
+          book: "Matthew",
+          title: "Jesus Walks on Water",
+          description: "When the storm rises, keep your eyes on Jesus and take courage."
+        },
+        {
+          id: "feKVhavdT9c",
+          verse: "John 15:18",
+          book: "John",
+          title: "If the World Hates You",
+          description: "Jesus prepares His followers to endure rejection without losing heart."
+        },
+        {
+          id: "9dXzHTDVNUw",
+          verse: "Luke 9:23",
+          book: "Luke",
+          title: "Take Up Your Cross Daily",
+          description: "Following Jesus becomes a daily surrender, carried with faith."
+        },
+        {
+          id: "8K6PNCd1JII",
+          verse: "Mark 15:16-18",
+          book: "Mark",
+          title: "They Mocked the King",
+          description: "The suffering King bears mockery on the road to redemption."
+        },
+        {
+          id: "ld2r7cLTWQM",
+          verse: "Mark 5:25-34",
+          book: "Mark",
+          title: "She Touched Jesus' Garment",
+          description: "One reach of faith meets the healing power and compassion of Jesus."
+        },
+        {
+          id: "3z_kC2VPjX4",
+          verse: "Exodus 14:21",
+          book: "Exodus",
+          title: "God Parted the Red Sea",
+          description: "The Lord makes a way where no way seems possible."
+        },
+        {
+          id: "OnjVM2UEL_A",
+          verse: "Isaiah 53:5",
+          book: "Isaiah",
+          title: "By His Wounds We Are Healed",
+          description: "The promise of healing is carried through the wounds of the Savior."
+        },
+        {
+          id: "2QfXPh3CXqM",
+          verse: "Luke 23:43",
+          book: "Luke",
+          title: "With Me in Paradise",
+          description: "Grace reaches the thief on the cross with a promise of paradise."
+        },
+        {
+          id: "Sx7lSt5ZR10",
+          verse: "Psalm 91:1",
+          book: "Psalm",
+          title: "Under the Shadow of the Almighty",
+          description: "A refuge promise for every heart seeking shelter in God."
+        },
+        {
+          id: "jwfjkHhfF44",
+          verse: "John 6:20",
+          book: "John",
+          title: "It Is I; Do Not Be Afraid",
+          description: "Jesus speaks peace over fear when the waves rise."
+        },
+        {
+          id: "796XurtBRwA",
+          verse: "John 14:6",
+          book: "John",
+          title: "I Am the Way",
+          description: "A second John 14:6 meditation centered on truth, life, and salvation."
+        },
+        {
+          id: "ZtkrYKVwZus",
+          verse: "John 11:43",
+          book: "John",
+          title: "Lazarus, Come Out",
+          description: "When Jesus calls, death must surrender to resurrection life."
+        },
+        {
+          id: "6lMkjigCCa4",
+          verse: "Daniel 6:22",
+          book: "Daniel",
+          title: "God Shut the Lions' Mouths",
+          description: "Daniel's deliverance becomes a bold picture of God's protection."
+        },
+        {
+          id: "zzU2fklIwrI",
+          verse: "John 16:20",
+          book: "John",
+          title: "Your Grief Will Turn to Joy",
+          description: "Jesus promises that sorrow will not have the final word."
+        },
+        {
+          id: "iAkCXozUvxo",
+          verse: "Matthew 6:24",
+          book: "Matthew",
+          title: "You Cannot Serve God and Money",
+          description: "A clear call to choose the Master who owns the heart."
+        },
+        {
+          id: "Px_PSnCJ2vw",
+          verse: "John 16:33",
+          book: "John",
+          title: "Take Courage",
+          description: "Jesus has overcome the world, so courage can rise again."
+        },
+        {
+          id: "lkaKtx0xm1U",
+          verse: "Luke 14:27",
+          book: "Luke",
+          title: "Carry Your Cross and Follow Me",
+          description: "Discipleship is costly, honest, and centered on Jesus."
+        },
+        {
+          id: "NfxfSw0CyNk",
+          verse: "Luke 23:46",
+          book: "Luke",
+          title: "Into Your Hands",
+          description: "Jesus entrusts His spirit to the Father in perfect surrender."
+        },
+        {
+          id: "rgQnqihCW_Y",
+          verse: "Matthew 17:20",
+          book: "Matthew",
+          title: "Faith as Small as a Mustard Seed",
+          description: "Small faith in a mighty God can move what looks impossible."
+        },
+        {
+          id: "881nW7KyBGk",
+          verse: "Luke 23:34",
+          book: "Luke",
+          title: "Father, Forgive Them",
+          description: "From the cross, Jesus answers cruelty with mercy."
+        },
+        {
+          id: "NAziKIGfgn8",
+          verse: "Revelation 22:13",
+          book: "Revelation",
+          title: "The Alpha and the Omega",
+          description: "The beginning and the end, spoken with the weight of eternity."
+        },
+        {
+          id: "FLPnHtpUpi4",
+          verse: "Mark 1:25",
+          book: "Mark",
+          title: "Be Silent and Come Out",
+          description: "Jesus speaks with authority, and darkness has to obey."
+        },
+        {
+          id: "O4NZff0Vnq8",
+          verse: "John 19:30",
+          book: "John",
+          title: "It Is Finished",
+          description: "The cross becomes the place where mercy completes the work."
+        },
+        {
+          id: "cYEDZ-vphWE",
+          verse: "John 8:12",
+          book: "John",
+          title: "Light of the World",
+          description: "Whoever follows Jesus will not walk in darkness."
+        },
+        {
+          id: "OdAH-CgFrI8",
+          verse: "Matthew 11:28",
+          book: "Matthew",
+          title: "Come to Me",
+          description: "A call to the weary and burdened, carried with warmth and rest."
+        },
+        {
+          id: "tpu0LC9Kmmk",
+          verse: "John 14:6",
+          book: "John",
+          title: "Jesus Is the Way",
+          description: "The way, the truth, and the life are found in Christ."
+        },
+        {
+          id: "EL6hkOsAoSo",
+          verse: "John 11:25",
+          book: "John",
+          title: "Jesus Has the Final Word",
+          description: "A resurrection promise for every place that feels beyond hope."
+        },
+        {
+          id: "yyaPvjrbXqk",
+          verse: "John 13:34",
+          book: "John",
+          title: "Love One Another",
+          description: "Jesus commands His people to love as He has loved them."
+        }
+      ];
+
+      const topStoryCards = document.getElementById("top-story-cards");
+      const storyScroll = document.getElementById("story-scroll");
+      const authorGroups = document.getElementById("author-groups");
+      const hero = document.querySelector(".hero");
+      const heroPreviewFinished = document.getElementById("hero-preview-finished");
+      const thumbnailFor = (id) => `https://i.ytimg.com/vi/${id}/hq720.jpg`;
+      const shortsUrlFor = (id) => `https://www.youtube.com/shorts/${id}`;
+      const topStoryIds = [
+        { id: "jwfjkHhfF44", views: "3.8K views" },
+        { id: "796XurtBRwA", views: "2.1K views" },
+        { id: "ld2r7cLTWQM", views: "1.7K views" },
+        { id: "OnjVM2UEL_A", views: "1.7K views" },
+        { id: "iAkCXozUvxo", views: "1.7K views" }
+      ];
+
+      const escapeHtml = (value) => value.replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+
+      if (topStoryCards && storyScroll && authorGroups) {
+        const topStories = topStoryIds
+          .map((rankedStory) => ({
+            ...youtubeStories.find((story) => story.id === rankedStory.id),
+            views: rankedStory.views
+          }))
+          .filter((story) => story.id);
+        const topStoryIdSet = new Set(topStories.map((story) => story.id));
+        const remainingStories = youtubeStories.filter((story) => !topStoryIdSet.has(story.id));
+
+        const renderStoryCard = (story, options = {}) => `
+          <a
+            class="story-card${options.isTop ? " is-top" : ""}"
+            href="${shortsUrlFor(story.id)}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch ${escapeHtml(story.verse)} on YouTube Shorts"
+          >
+            <img src="${thumbnailFor(story.id)}" alt="${escapeHtml(story.title)} thumbnail" loading="${options.eager ? "eager" : "lazy"}" />
+            <div>
+              <span>${escapeHtml(story.verse)}</span>
+              <h3>${escapeHtml(story.title)}</h3>
+              ${story.views ? `<small class="story-views">${escapeHtml(story.views)}</small>` : ""}
+              <p>${escapeHtml(story.description)}</p>
+            </div>
+          </a>
+        `;
+
+        topStoryCards.innerHTML = topStories
+          .map((story, index) => renderStoryCard(story, { isTop: true, eager: index < 5 }))
+          .join("");
+
+        storyScroll.innerHTML = remainingStories
+          .map((story) => renderStoryCard(story))
+          .join("");
+
+        const groupedStories = youtubeStories.reduce((groups, story) => {
+          groups[story.book] = groups[story.book] || [];
+          groups[story.book].push(story);
+          return groups;
+        }, {});
+
+        const bookOrder = [
+          "Job",
+          "Psalm",
+          "Exodus",
+          "Isaiah",
+          "Daniel",
+          "Matthew",
+          "Mark",
+          "Luke",
+          "John",
+          "Revelation",
+          "Messages"
+        ];
+
+        authorGroups.innerHTML = bookOrder
+          .filter((book) => groupedStories[book])
+          .map((book) => `
+            <details class="author-group" open>
+              <summary>${escapeHtml(book)}</summary>
+              <div class="verse-links">
+                ${groupedStories[book].map((story) => `
+                  <a href="${shortsUrlFor(story.id)}" target="_blank" rel="noopener noreferrer">
+                    <span>${escapeHtml(story.verse)}</span>
+                    <strong>${escapeHtml(story.title)}</strong>
+                  </a>
+                `).join("")}
+              </div>
+            </details>
+          `).join("");
+
+        authorGroups.querySelectorAll(".verse-links a").forEach((link) => {
+          const id = link.href.split("/").pop();
+          link.style.setProperty("--verse-bg", `url('${thumbnailFor(id)}')`);
+        });
+      }
+
+      if (hero && heroPreviewFinished) {
+        window.setTimeout(() => {
+          hero.classList.add("is-preview-finished");
+          heroPreviewFinished.setAttribute("aria-hidden", "false");
+        }, 30000);
+      }
+
       document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener("click", (event) => {
           const id = link.getAttribute("href");
@@ -497,6 +801,21 @@
         navAudio.addEventListener("pause", syncNavToggle);
         navAudio.addEventListener("ended", syncNavToggle);
         requestAnimationFrame(drawNavVisualizer);
+
+        const tryAutoplay = async () => {
+          try {
+            await initNavAudio();
+            await navAudio.play();
+          } catch {
+            syncNavToggle();
+          }
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", tryAutoplay, { once: true });
+        } else {
+          tryAutoplay();
+        }
       }
     </script>
   </body>
