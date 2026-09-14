@@ -185,6 +185,7 @@
               <h3 id="author-library-title">Find each story by book, chapter, and verse.</h3>
             </div>
             <div class="scripture-browser">
+              <select class="book-select" id="book-select" aria-label="Choose a Bible book"></select>
               <div class="book-tabs" id="book-tabs" role="tablist" aria-label="Bible books"></div>
               <div class="verse-panel" id="verse-panel" role="tabpanel" aria-live="polite"></div>
             </div>
@@ -578,6 +579,7 @@
       ];
 
       const topStoryCards = document.getElementById("top-story-cards");
+      const bookSelect = document.getElementById("book-select");
       const bookTabs = document.getElementById("book-tabs");
       const versePanel = document.getElementById("verse-panel");
       const hero = document.querySelector(".hero");
@@ -600,7 +602,7 @@
         "'": "&#39;"
       }[char]));
 
-      if (topStoryCards && bookTabs && versePanel) {
+      if (topStoryCards && bookSelect && bookTabs && versePanel) {
         const topStories = topStoryIds
           .map((rankedStory) => ({
             ...youtubeStories.find((story) => story.id === rankedStory.id),
@@ -694,6 +696,7 @@
             tab.setAttribute("aria-selected", String(isActive));
             tab.tabIndex = isActive ? 0 : -1;
           });
+          bookSelect.value = book;
 
           versePanel.innerHTML = `
             <div class="verse-panel-header">
@@ -728,6 +731,18 @@
             </button>
           `).join("")}
         `).join("");
+
+        bookSelect.innerHTML = visibleGroups.map((group) => `
+          <optgroup label="${escapeHtml(group.label)}">
+            ${group.books.map((book) => `
+              <option value="${escapeHtml(book)}">${escapeHtml(book)} (${groupedStories[book].length})</option>
+            `).join("")}
+          </optgroup>
+        `).join("");
+
+        bookSelect.addEventListener("change", (event) => {
+          renderVersePanel(event.target.value);
+        });
 
         bookTabs.addEventListener("click", (event) => {
           const tab = event.target.closest(".book-tab");

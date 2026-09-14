@@ -801,6 +801,10 @@ body.nav-open .menu-toggle span:last-child {
   align-items: start;
 }
 
+.book-select {
+  display: none;
+}
+
 .book-tabs {
   display: grid;
   gap: 8px;
@@ -1242,22 +1246,21 @@ body.nav-open .menu-toggle span:last-child {
     grid-template-columns: 1fr;
   }
 
+  .book-select {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid rgba(216, 166, 79, 0.28);
+    border-radius: 8px;
+    color: var(--ink);
+    background: rgba(20, 17, 13, 0.86);
+    font: inherit;
+    font-weight: 800;
+  }
+
   .book-tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 7px;
-    padding: 10px;
-  }
-
-  .book-group-label {
-    grid-column: 1 / -1;
-    margin: 10px 2px 0;
-    padding: 0;
-  }
-
-  .book-tab {
-    min-width: 0;
-    min-height: 42px;
-    padding-inline: 10px;
+    display: none;
   }
 
   .verse-card-grid {
@@ -1304,14 +1307,6 @@ body.nav-open .menu-toggle span:last-child {
 
   .story-cards {
     grid-template-columns: 1fr;
-  }
-
-  .book-tabs {
-    grid-template-columns: 1fr;
-  }
-
-  .book-tab span {
-    font-size: 1rem;
   }
 
   .story-card img {
