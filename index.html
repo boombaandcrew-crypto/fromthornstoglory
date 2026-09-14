@@ -684,8 +684,25 @@
             books: group.books.filter((book) => groupedStories[book])
           }))
           .filter((group) => group.books.length);
-        const visibleBooks = visibleGroups.flatMap((group) => group.books);
-        let activeBook = visibleBooks.includes("John") ? "John" : visibleBooks[0];
+        let activeBook = "";
+
+        const renderVersePrompt = () => {
+          activeBook = "";
+          bookSelect.value = "";
+          bookTabs.querySelectorAll(".book-tab").forEach((tab, index) => {
+            tab.classList.remove("is-active");
+            tab.setAttribute("aria-selected", "false");
+            tab.tabIndex = index === 0 ? 0 : -1;
+          });
+
+          versePanel.innerHTML = `
+            <div class="verse-empty-state">
+              <span>Select a book</span>
+              <h4>Choose a book to browse each story by chapter and verse.</h4>
+              <p>The stories will appear here in Scripture order.</p>
+            </div>
+          `;
+        };
 
         const renderVersePanel = (book) => {
           const stories = groupedStories[book] || [];
@@ -732,16 +749,22 @@
           `).join("")}
         `).join("");
 
-        bookSelect.innerHTML = visibleGroups.map((group) => `
+        bookSelect.innerHTML = `
+          <option value="">Select a book...</option>
+          ${visibleGroups.map((group) => `
           <optgroup label="${escapeHtml(group.label)}">
             ${group.books.map((book) => `
               <option value="${escapeHtml(book)}">${escapeHtml(book)} (${groupedStories[book].length})</option>
             `).join("")}
           </optgroup>
-        `).join("");
+        `).join("")}`;
 
         bookSelect.addEventListener("change", (event) => {
-          renderVersePanel(event.target.value);
+          if (event.target.value) {
+            renderVersePanel(event.target.value);
+          } else {
+            renderVersePrompt();
+          }
         });
 
         bookTabs.addEventListener("click", (event) => {
@@ -755,16 +778,17 @@
           event.preventDefault();
           const tabs = [...bookTabs.querySelectorAll(".book-tab")];
           const currentIndex = tabs.findIndex((tab) => tab.dataset.book === activeBook);
-          let nextIndex = currentIndex;
+          const baseIndex = currentIndex >= 0 ? currentIndex : 0;
+          let nextIndex = baseIndex;
           if (event.key === "Home") nextIndex = 0;
           if (event.key === "End") nextIndex = tabs.length - 1;
-          if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-          if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (currentIndex + 1) % tabs.length;
+          if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (baseIndex - 1 + tabs.length) % tabs.length;
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (baseIndex + 1) % tabs.length;
           tabs[nextIndex].focus();
           renderVersePanel(tabs[nextIndex].dataset.book);
         });
 
-        renderVersePanel(activeBook);
+        renderVersePrompt();
       }
 
       if (hero && heroPreviewFinished) {
