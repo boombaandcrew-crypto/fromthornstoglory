@@ -178,18 +178,16 @@
               <small>Ranked by current YouTube views</small>
             </div>
             <div class="story-cards story-cards-top" id="top-story-cards"></div>
-            <div class="story-row-heading story-row-heading-secondary">
-              <span>More stories</span>
-              <small>Scroll to browse the rest</small>
-            </div>
-            <div class="story-scroll" id="story-scroll" tabindex="0" aria-label="More YouTube Shorts"></div>
           </div>
           <div class="author-library" aria-labelledby="author-library-title">
             <div class="author-library-header">
               <p class="eyebrow">Browse by book</p>
               <h3 id="author-library-title">Find each story by book, chapter, and verse.</h3>
             </div>
-            <div class="author-groups" id="author-groups"></div>
+            <div class="scripture-browser">
+              <div class="book-tabs" id="book-tabs" role="tablist" aria-label="Bible books"></div>
+              <div class="verse-panel" id="verse-panel" role="tabpanel" aria-live="polite"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -580,8 +578,8 @@
       ];
 
       const topStoryCards = document.getElementById("top-story-cards");
-      const storyScroll = document.getElementById("story-scroll");
-      const authorGroups = document.getElementById("author-groups");
+      const bookTabs = document.getElementById("book-tabs");
+      const versePanel = document.getElementById("verse-panel");
       const hero = document.querySelector(".hero");
       const heroPreviewFinished = document.getElementById("hero-preview-finished");
       const thumbnailFor = (id) => `https://i.ytimg.com/vi/${id}/hq720.jpg`;
@@ -602,15 +600,13 @@
         "'": "&#39;"
       }[char]));
 
-      if (topStoryCards && storyScroll && authorGroups) {
+      if (topStoryCards && bookTabs && versePanel) {
         const topStories = topStoryIds
           .map((rankedStory) => ({
             ...youtubeStories.find((story) => story.id === rankedStory.id),
             views: rankedStory.views
           }))
           .filter((story) => story.id);
-        const topStoryIdSet = new Set(topStories.map((story) => story.id));
-        const remainingStories = youtubeStories.filter((story) => !topStoryIdSet.has(story.id));
 
         const renderStoryCard = (story, options = {}) => `
           <a
@@ -634,9 +630,22 @@
           .map((story, index) => renderStoryCard(story, { isTop: true, eager: index < 5 }))
           .join("");
 
-        storyScroll.innerHTML = remainingStories
-          .map((story) => renderStoryCard(story))
-          .join("");
+        const verseSortKey = (story) => {
+          const match = story.verse.match(/(\d+)\s*:\s*(\d+)/);
+          return {
+            chapter: match ? Number(match[1]) : Number.MAX_SAFE_INTEGER,
+            verse: match ? Number(match[2]) : Number.MAX_SAFE_INTEGER,
+            title: story.title
+          };
+        };
+
+        const compareStoriesByVerse = (firstStory, secondStory) => {
+          const first = verseSortKey(firstStory);
+          const second = verseSortKey(secondStory);
+          return first.chapter - second.chapter
+            || first.verse - second.verse
+            || first.title.localeCompare(second.title);
+        };
 
         const groupedStories = youtubeStories.reduce((groups, story) => {
           groups[story.book] = groups[story.book] || [];
@@ -644,40 +653,103 @@
           return groups;
         }, {});
 
-        const bookOrder = [
-          "Job",
-          "Psalm",
-          "Exodus",
-          "Isaiah",
-          "Daniel",
-          "Matthew",
-          "Mark",
-          "Luke",
-          "John",
-          "Revelation",
-          "Messages"
+        Object.values(groupedStories).forEach((stories) => {
+          stories.sort(compareStoriesByVerse);
+        });
+
+        const bookGroups = [
+          {
+            label: "Old Testament",
+            books: ["Job", "Psalm", "Exodus", "Isaiah", "Daniel"]
+          },
+          {
+            label: "Gospels",
+            books: ["Matthew", "Mark", "Luke", "John"]
+          },
+          {
+            label: "New Testament",
+            books: ["Revelation"]
+          },
+          {
+            label: "More",
+            books: ["Messages"]
+          }
         ];
 
-        authorGroups.innerHTML = bookOrder
-          .filter((book) => groupedStories[book])
-          .map((book) => `
-            <details class="author-group" open>
-              <summary>${escapeHtml(book)}</summary>
-              <div class="verse-links">
-                ${groupedStories[book].map((story) => `
-                  <a href="${shortsUrlFor(story.id)}" target="_blank" rel="noopener noreferrer">
-                    <span>${escapeHtml(story.verse)}</span>
-                    <strong>${escapeHtml(story.title)}</strong>
-                  </a>
-                `).join("")}
-              </div>
-            </details>
-          `).join("");
+        const visibleGroups = bookGroups
+          .map((group) => ({
+            ...group,
+            books: group.books.filter((book) => groupedStories[book])
+          }))
+          .filter((group) => group.books.length);
+        const visibleBooks = visibleGroups.flatMap((group) => group.books);
+        let activeBook = visibleBooks.includes("John") ? "John" : visibleBooks[0];
 
-        authorGroups.querySelectorAll(".verse-links a").forEach((link) => {
-          const id = link.href.split("/").pop();
-          link.style.setProperty("--verse-bg", `url('${thumbnailFor(id)}')`);
+        const renderVersePanel = (book) => {
+          const stories = groupedStories[book] || [];
+          activeBook = book;
+          bookTabs.querySelectorAll(".book-tab").forEach((tab) => {
+            const isActive = tab.dataset.book === book;
+            tab.classList.toggle("is-active", isActive);
+            tab.setAttribute("aria-selected", String(isActive));
+            tab.tabIndex = isActive ? 0 : -1;
+          });
+
+          versePanel.innerHTML = `
+            <div class="verse-panel-header">
+              <span>${escapeHtml(book)}</span>
+              <strong>${stories.length} ${stories.length === 1 ? "story" : "stories"}</strong>
+            </div>
+            <div class="verse-card-grid">
+              ${stories.map((story) => `
+                <article class="verse-card">
+                  <img src="${thumbnailFor(story.id)}" alt="${escapeHtml(story.title)} thumbnail" loading="lazy" />
+                  <div>
+                    <span>${escapeHtml(story.verse)}</span>
+                    <h4>${escapeHtml(story.title)}</h4>
+                    <p>${escapeHtml(story.description)}</p>
+                    <a href="${shortsUrlFor(story.id)}" target="_blank" rel="noopener noreferrer">
+                      Watch Short
+                      <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </article>
+              `).join("")}
+            </div>
+          `;
+        };
+
+        bookTabs.innerHTML = visibleGroups.map((group) => `
+          <div class="book-group-label" role="presentation">${escapeHtml(group.label)}</div>
+          ${group.books.map((book) => `
+            <button class="book-tab" type="button" role="tab" data-book="${escapeHtml(book)}" aria-selected="false">
+              <span>${escapeHtml(book)}</span>
+              <strong>${groupedStories[book].length}</strong>
+            </button>
+          `).join("")}
+        `).join("");
+
+        bookTabs.addEventListener("click", (event) => {
+          const tab = event.target.closest(".book-tab");
+          if (!tab) return;
+          renderVersePanel(tab.dataset.book);
         });
+
+        bookTabs.addEventListener("keydown", (event) => {
+          if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          const tabs = [...bookTabs.querySelectorAll(".book-tab")];
+          const currentIndex = tabs.findIndex((tab) => tab.dataset.book === activeBook);
+          let nextIndex = currentIndex;
+          if (event.key === "Home") nextIndex = 0;
+          if (event.key === "End") nextIndex = tabs.length - 1;
+          if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (currentIndex + 1) % tabs.length;
+          tabs[nextIndex].focus();
+          renderVersePanel(tabs[nextIndex].dataset.book);
+        });
+
+        renderVersePanel(activeBook);
       }
 
       if (hero && heroPreviewFinished) {
