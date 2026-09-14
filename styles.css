@@ -1233,12 +1233,23 @@ body.nav-open .menu-toggle span:last-child {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .author-library {
+    margin-top: 34px;
+    padding: 18px;
+    border: 1px solid rgba(216, 166, 79, 0.22);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(32, 26, 18, 0.92), rgba(12, 10, 8, 0.78));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  }
+
   .author-library-header {
     display: block;
+    margin-bottom: 16px;
   }
 
   .author-library-header h3 {
     margin-top: 8px;
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
     text-align: left;
   }
 
@@ -1249,14 +1260,24 @@ body.nav-open .menu-toggle span:last-child {
   .book-select {
     display: block;
     width: 100%;
-    min-height: 48px;
-    padding: 0 14px;
+    min-height: 58px;
+    padding: 0 48px 0 18px;
     border: 1px solid rgba(216, 166, 79, 0.28);
     border-radius: 8px;
     color: var(--ink);
-    background: rgba(20, 17, 13, 0.86);
+    background-color: rgba(20, 17, 13, 0.92);
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--gold-bright) 50%),
+      linear-gradient(135deg, var(--gold-bright) 50%, transparent 50%);
+    background-position:
+      calc(100% - 25px) 50%,
+      calc(100% - 17px) 50%;
+    background-repeat: no-repeat;
+    background-size: 8px 8px, 8px 8px;
     font: inherit;
-    font-weight: 800;
+    font-size: 1.05rem;
+    font-weight: 900;
+    appearance: none;
   }
 
   .book-tabs {
